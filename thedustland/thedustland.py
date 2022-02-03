@@ -15,7 +15,7 @@ logger.remove()
 logger.add(stderr, format="<white>{time:HH:mm:ss}</white> | <level>{level: <8}</level> | <cyan>{line}</cyan> - <white>{message}</white>")
 clear = lambda: system('cls')
 print('Telegram Channel - https://t.me/n4z4v0d\n')
-windll.kernel32.SetConsoleTitleW('TheDustland AutoRegger | by NAZAVOD')
+windll.kernel32.SetConsoleTitleW('TheDustland Auto Reger | by NAZAVOD')
 
 useproxy = str(input('Use tor proxy? (y/N): '))
 threads = int(input('Threads: '))
