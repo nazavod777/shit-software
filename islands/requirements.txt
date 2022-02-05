@@ -1,0 +1,6 @@
+requests==2.27.1
+web3==5.25.0
+eth-account==0.5.6
+random-username==1.0.2
+names==0.3.0
+loguru==0.5.3
