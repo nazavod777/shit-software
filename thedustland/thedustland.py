@@ -1,4 +1,4 @@
-from requests import post
+from requests import post, get
 from web3.auto import w3
 from threading import Thread
 from ctypes import windll
@@ -9,6 +9,8 @@ from random import randint
 from time import sleep
 from gc import collect
 from os import system
+from json import loads
+from fake_useragent import UserAgent
 
 disable_warnings()
 logger.remove()
@@ -36,13 +38,19 @@ def mainth():
 		try:
 			walletdata = createwallet()
 			if useproxy in ('y', 'Y'):
-				r = post('https://hn0tygvxl1.execute-api.ap-southeast-1.amazonaws.com/dev-v1/users/wallet/connect', json={"chain_id":"0x89","wallet_id":walletdata[0]}, proxies=genproxy(), verify=False)
+				r = get('https://vvpgbg661j.execute-api.ap-southeast-1.amazonaws.com/prod/ip-verify')
+				if loads(r.text)['isWhitelisted'] == True:
+					r = post('https://hn0tygvxl1.execute-api.ap-southeast-1.amazonaws.com/prod-v1/users/wallet/connect', json={"chain_id":"0x89","wallet_id":walletdata[0],"ip_address":loads(r.text)['ip']}, verify=False, headers={'accept': '*/*', 'accept-language': 'ru,en;q=0.9,vi;q=0.8,es;q=0.7', 'content-type': 'application/json', 'origin': 'https://www.thedustland.com', 'referer': 'https://www.thedustland.com/', 'user-agent': UserAgent().random}, proxies=genproxy())
 			else:
-				r = post('https://hn0tygvxl1.execute-api.ap-southeast-1.amazonaws.com/dev-v1/users/wallet/connect', json={"chain_id":"0x89","wallet_id":walletdata[0]}, verify=False)
+				r = get('https://vvpgbg661j.execute-api.ap-southeast-1.amazonaws.com/prod/ip-verify')
+				if loads(r.text)['isWhitelisted'] == True:
+					r = post('https://hn0tygvxl1.execute-api.ap-southeast-1.amazonaws.com/prod-v1/users/wallet/connect', json={"chain_id":"0x89","wallet_id":walletdata[0],"ip_address":loads(r.text)['ip']}, verify=False, headers={'accept': '*/*', 'accept-language': 'ru,en;q=0.9,vi;q=0.8,es;q=0.7', 'content-type': 'application/json', 'origin': 'https://www.thedustland.com', 'referer': 'https://www.thedustland.com/', 'user-agent': UserAgent().random})
 			if r.text == '{"status_code":200}':
 				with open('wallets.txt', 'a') as file:
 					file.write(f'{walletdata[0]}:{walletdata[1]}\n')
 				logger.success(f'Wallet {walletdata[0]} successfully registered')
+			else:
+				logger.error(f'Wrong response: {r.text}')
 		except Exception as error:
 			logger.error(f'Error: {str(error)}')
 
