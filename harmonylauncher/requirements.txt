@@ -1,0 +1,6 @@
+requests==2.27.1
+cfscrape==2.1.1
+pyuseragents==1.0.5
+loguru==0.5.3
+web3==5.25.0
+PySocks==1.7.1
