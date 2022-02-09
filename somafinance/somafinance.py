@@ -48,7 +48,7 @@ def mainth():
 			r = session.get(ref_link)
 			public_token = r.text.split('(document,"script","vrlps-js","')[-1].split('"')[0]
 
-			r = session.post('https://app.viral-loops.com/api/v2/events', json={"params":{"event":"registration","user":{"firstname":get_first_name(),"lastname":get_last_name(),"email":email,"extraData":{},"consents":{},"refSource":"copy"},"referrer":{"referralCode":"4m7uf3v"},"refSource":"copy","acquiredFrom":"popup"},"publicToken":public_token})
+			r = session.post('https://app.viral-loops.com/api/v2/events', json={"params":{"event":"registration","user":{"firstname":get_first_name(),"lastname":get_last_name(),"email":email,"extraData":{},"consents":{},"refSource":"copy"},"referrer":{"referralCode":ref_id},"refSource":"copy","acquiredFrom":"popup"},"publicToken":public_token})
 
 			if int(r.status_code) != 200:
 				raise Exception('wrong_code')
