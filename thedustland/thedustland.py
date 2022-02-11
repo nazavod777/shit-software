@@ -45,7 +45,7 @@ def mainth():
 				r = get('https://vvpgbg661j.execute-api.ap-southeast-1.amazonaws.com/prod/ip-verify')
 				if loads(r.text)['isWhitelisted'] == True:
 					r = post('https://hn0tygvxl1.execute-api.ap-southeast-1.amazonaws.com/prod-v1/users/wallet/connect', json={"chain_id":"0x89","wallet_id":walletdata[0],"ip_address":loads(r.text)['ip']}, verify=False, headers={'accept': '*/*', 'accept-language': 'ru,en;q=0.9,vi;q=0.8,es;q=0.7', 'content-type': 'application/json', 'origin': 'https://www.thedustland.com', 'referer': 'https://www.thedustland.com/', 'user-agent': UserAgent().random})
-			if r.text == '{"status_code":200}':
+			if 'status_code":200' in str(r.text):
 				with open('wallets.txt', 'a') as file:
 					file.write(f'{walletdata[0]}:{walletdata[1]}\n')
 				logger.success(f'Wallet {walletdata[0]} successfully registered')
