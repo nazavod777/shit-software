@@ -92,7 +92,7 @@ def transfer_nft(privatekey, main_wallet, address, nonce):
 
 if __name__ == '__main__':
 	clear()
-	abi = open('ABI.txt','r').read().replace('\n','')
+	abi = open('ABI.json','r').read().replace('\n','')
 	web3 = Web3(Web3.HTTPProvider('https://matic-mainnet.chainstacklabs.com'))
 	contract = web3.eth.contract(address=web3.toChecksumAddress('0x4867f7ACb9078d2b462442c5ca3DBa01456844B5'), abi=abi)
 	while wallets:
