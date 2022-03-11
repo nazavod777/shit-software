@@ -1,0 +1,7 @@
+requests==2.27.1
+pyuseragents==1.0.5
+web3==5.28.0
+urllib3==1.26.8
+loguru==0.6.0
+names==0.3.0
+PySocks==1.7.1
