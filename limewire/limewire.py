@@ -12,6 +12,7 @@ from sys import stderr
 from gc import collect
 from sys import exit
 from pypasser import reCaptchaV3
+from urllib.parse import quote_plus
 
 
 disable_warnings()
@@ -90,7 +91,7 @@ def mainth(email):
         reCaptcha_response = reCaptchaV3('https://www.google.com/recaptcha/api2/anchor?ar=1&k=6LclQsMeAAAAAGyZjDVufqFlGjdUhOBhecNEJcRj&co=aHR0cHM6Ly9saW1ld2lyZS5jb206NDQz&hl=ru&v=85AXn53af-oJBEtL2o2WpAjZ&size=invisible&cb=4vt809nic0tr')
 
 
-        r = session.post('https://wlapi.limewire.com/signup', data = f'email={email}&ref={ref_id}&g-recaptcha-response={reCaptcha_response}')
+        r = session.post('https://wlapi.limewire.com/signup', data = f'email={quote_plus(email)}&ref={ref_id}&g-recaptcha-response={reCaptcha_response}')
 
         if '{"id":"' not in str(r.text):
             raise Exception('wrong_response')
