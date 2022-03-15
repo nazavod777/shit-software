@@ -104,7 +104,6 @@ def mainth(email):
 
 
         r = session.post('https://wlapi.limewire.com/signup', data = f'email={email}&ref={ref_id}&g-recaptcha-response={reCaptcha_response}')
-        print(r.text)
 
         if '{"id":"' not in str(r.text):
             raise Exception('wrong_response')
