@@ -18,7 +18,7 @@ disable_warnings()
 def clear(): return system('cls')
 logger.remove()
 logger.add(stderr, format="<white>{time:HH:mm:ss}</white> | <level>{level: <8}</level> | <cyan>{line}</cyan> - <white>{message}</white>")
-windll.kernel32.SetConsoleTitleW('GetVerse Auto Reger | by NAZAVOD')
+windll.kernel32.SetConsoleTitleW('LimeWire Auto Reger | by NAZAVOD')
 print('Telegram channel - https://t.me/n4z4v0d\n')
 
 
@@ -29,12 +29,8 @@ use_proxy = str(input('Использовать Proxy? (y/N): '))
 
 
 if use_proxy in ('y', 'Y'):
-    proxy_source = int(input('Откуда брать прокси? (1 - из текствого файла; 2 - использовать tor proxy): '))
-
-
-    if proxy_source == 1:
-        proxy_type = str(input('Введите тип прокси (http; https; socks4; socks5): '))
-        proxy_folder = str(input('Перетяните TXT файл с прокси: '))
+    proxy_type = str(input('Введите тип прокси (http; https; socks4; socks5): '))
+    proxy_folder = str(input('Перетяните TXT файл с прокси: '))
 
 
 mail_option = int(input('Выберите тип загрузки почт (1 - генерация на основе введенной gmail почты; 2 - из текстового документа; 3 - случайные почты): '))
@@ -70,12 +66,6 @@ def random_mail_absolute():
 	return (email)
 
 
-def random_tor_proxy():
-	proxy_auth = str(randint(1, 0x7fffffff)) + ':' + str(randint(1, 0x7fffffff))
-	proxies = {'http': 'socks5://{}@localhost:9150'.format(proxy_auth), 'https': 'socks5://{}@localhost:9150'.format(proxy_auth)}
-	return proxies
-
-
 def cleaner():
 	while True:
 		sleep(60)
@@ -93,11 +83,8 @@ def mainth(email):
 
 
         if use_proxy in ('y', 'Y'):
-            if proxy_source == 1:
-                proxy_str = random_proxy(proxy_folder)
-                session.proxies.update({'http': f'{proxy_type}://{proxy_str}', 'https': f'{proxy_type}://{proxy_str}'})
-            else:
-                session.proxies.update(random_tor_proxy())
+            proxy_str = random_proxy(proxy_folder)
+            session.proxies.update({'http': f'{proxy_type}://{proxy_str}', 'https': f'{proxy_type}://{proxy_str}'})
 
 
         reCaptcha_response = reCaptchaV3('https://www.google.com/recaptcha/api2/anchor?ar=1&k=6LclQsMeAAAAAGyZjDVufqFlGjdUhOBhecNEJcRj&co=aHR0cHM6Ly9saW1ld2lyZS5jb206NDQz&hl=ru&v=85AXn53af-oJBEtL2o2WpAjZ&size=invisible&cb=4vt809nic0tr')
