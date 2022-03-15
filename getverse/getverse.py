@@ -112,8 +112,9 @@ if __name__ == '__main__':
     
     if mail_option == 1:
         Thread(target=cleaner).start
-        while active_count() < threads:
-            Thread(target=mainth, args = (user_mail,)).start()
+        while True:
+            if active_count() < threads:
+                Thread(target=mainth, args = (user_mail,)).start()
     else:
         while emails_list:
             if active_count() < threads:
