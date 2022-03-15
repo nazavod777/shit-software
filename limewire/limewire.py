@@ -124,16 +124,18 @@ if __name__ == '__main__':
     
     if mail_option == 1:
         Thread(target=cleaner).start
-        while active_count() < threads:
-            Thread(target=mainth, args = (user_mail,)).start()
+        while True:
+            if active_count() < threads:
+                Thread(target=mainth, args = (user_mail,)).start()
     elif mail_option == 2:
         while emails_list:
             if active_count() < threads:
                 Thread(target=mainth, args=(emails_list.pop(0),)).start()
     elif mail_option == 3:
         Thread(target=cleaner).start
-        while active_count() < threads:
-            Thread(target=mainth, args = (random_mail_absolute(),)).start()
+        while True:
+            if active_count() < threads:
+                Thread(target=mainth, args = (random_mail_absolute(),)).start()
 
     while active_count() != 1:
         pass
